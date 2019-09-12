@@ -1,0 +1,224 @@
+body
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+body::before
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    z-index: -1;
+    background: url(../img/waves-pattern.png) repeat;
+}
+
+body.earth::before
+{
+    background: url(../img/leaves-pattern.png) repeat;
+}
+
+body.air::before
+{
+    background: url(../img/clouds-pattern.png) repeat;
+}
+
+body.bw::before
+{
+    background: #CCC;
+}
+
+#cont
+{
+    width: 60%;
+    margin: 0 auto;
+}
+
+#controls,
+#turn
+{
+    margin: 1em;
+    text-align: center;
+}
+
+#reset
+{
+    font-size: 1.2em;
+    padding: 0.5em;
+    color: #333;
+}
+
+#reset:disabled
+{
+    color: #CCC;
+}
+
+#theme
+{
+    font-size: 1.5em;
+    min-width: 10em;
+    height: 2em;
+    padding:0.25em;
+}
+
+
+#turn .turn
+{
+    font-weight: bold;
+}
+
+#board
+{
+    width: 75%;
+    margin: 0 auto;
+}
+
+#board td
+{
+    height: 20vh;
+    width: 20vh;
+    background-color: azure;
+    text-align: center;
+    font-size: 5em;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    text-shadow: #CCC 5px 5px 20px;
+    cursor: pointer;
+}
+
+.earth #board td
+{
+    background-color: antiquewhite;
+}
+
+.air #board td
+{
+    background-color: aliceblue;
+}
+
+.bw #board td
+{
+    background-color: white;
+}
+
+#board td.p1,
+#turn .turn.p1
+{
+    color: coral;
+    cursor: not-allowed;
+}
+
+.earth #board td.p1,
+.earth #turn .turn.p1
+{
+    color: chocolate;
+}
+
+.air #board td.p1,
+.air #turn .turn.p1
+{
+    color: dodgerblue;
+}
+
+.bw #board td.p1,
+.bw #turn .turn.p1
+{
+    color: black;
+}
+
+#board td.p2,
+#turn .turn.p2
+{
+    color: seagreen;
+    cursor: not-allowed;
+}
+
+.earth #board td.p2,
+.earth #turn .turn.p2
+{
+    color: burlywood;
+}
+
+.air #board td.p2,
+.air #turn .turn.p2
+{
+    color: cadetblue;
+}
+
+.bw #board td.p2,
+.bw #turn .turn.p2
+{
+    color: lightslategray;
+}
+
+#board.w0 td,
+#board.w1 td,
+#board.w2 td
+{
+    cursor: not-allowed;
+}
+
+#board.w0 td,
+.earth #board.w0 td,
+.air #board.w0 td,
+.bw #board.w0 td
+{
+    background-color: rgba(127, 127, 127, 0.25);
+    color: #CCC;
+}
+
+#board.w1 td
+{
+    background-color: rgba(255, 127, 80, 0.25);
+}
+
+.earth #board.w1 td
+{
+    background-color: rgba(210, 105, 30, 0.25);
+}
+
+.air #board.w1 td
+{
+    background-color: rgba(30, 144, 255, 0.25);
+}
+
+.bw #board.w1 td
+{
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+#board.w2 td
+{
+    background-color: rgba(46, 139, 87, 0.25);
+}
+
+.earth #board.w2 td
+{
+    background-color: rgba(222, 184, 135, 0.25);
+}
+
+.air #board.w2 td
+{
+    background-color: rgba(95, 158, 160, 0.25);
+}
+
+.bw #board.w2 td
+{
+    background-color: rgba(119, 136, 153, 0.25);
+}
+
+#board.w1 td.p2,
+#board.w2 td.p1,
+.earth #board.w1 td.p2,
+.earth #board.w2 td.p1,
+.air #board.w1 td.p2,
+.air #board.w2 td.p1,
+.bw #board.w1 td.p2,
+.bw #board.w2 td.p1
+{
+    color: #CCC;
+}

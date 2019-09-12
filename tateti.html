@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Ta-Te-Ti, suerte para mi...</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/animate.3.6.0.min.css" />
+    <link rel="stylesheet" href="css/tateti.css" />
+</head>
+<body onload="resetGame();">
+    <div id="cont">
+        <div id="controls">
+            <button id="reset" onclick="resetGame();" disabled="disabled">Reiniciar</button>
+            <select id="theme" onchange="changeTheme();">
+                <option value="ocean">Oceano</option>
+                <option value="earth">Tierra</option>
+                <option value="air">Aire</option>
+                <option value="bw">Blanco y Negro</option>
+            </select>
+        </div>
+        <div id="turn">Jugador: <span class="turn">1</span></div>
+        <table id="board">
+            <tbody>
+                <tr>
+                    <td id="c00" onclick="play(this);"></td>
+                    <td id="c01" onclick="play(this);"></td>
+                    <td id="c02" onclick="play(this);"></td>
+                </tr>
+                <tr>
+                    <td id="c10" onclick="play(this);"></td>
+                    <td id="c11" onclick="play(this);"></td>
+                    <td id="c12" onclick="play(this);"></td>
+                </tr>
+                <tr>
+                    <td id="c20" onclick="play(this);"></td>
+                    <td id="c21" onclick="play(this);"></td>
+                    <td id="c22" onclick="play(this);"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/tateti.js"></script>
+</body>
+</html>
