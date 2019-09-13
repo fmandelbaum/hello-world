@@ -222,3 +222,8 @@ body.bw::before
 {
     color: #CCC;
 }
+
+#board td.wc
+{
+    background-color: gold !important;
+}

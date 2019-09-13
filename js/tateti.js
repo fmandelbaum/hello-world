@@ -16,9 +16,9 @@ function resetGame() {
         for (var i = 0; i < 3; i++) {
             gameState.board.push(["", "", ""]);
         }
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-                document.getElementById("c" + i + j).classList.remove("p1", "p2", "animated", "flipInX");
+        for (var j = 0; j < 3; j++) {
+            for (var k = 0; k < 3; k++) {
+                document.getElementById("c" + j + k).classList.remove("p1", "p2", "wc", "animated", "flipInX");
             }
         }
         gameState.theme = document.getElementById("theme").value;
@@ -83,16 +83,60 @@ function checkWin(player) {
     }
 }
 
+function hiliteWinningCombination(cells) {
+    cells.forEach(function(cell) { document.getElementById(cell).classList.add("wc"); });
+}
+
 function checkWinRow(player) {
-    return (gameState.board[0][0] === player && gameState.board[0][1] === player && gameState.board[0][2] === player) || (gameState.board[1][0] === player && gameState.board[1][1] === player && gameState.board[1][2] === player) || (gameState.board[2][0] === player && gameState.board[2][1] === player && gameState.board[2][2] === player);
+    var wonRow1 = gameState.board[0][0] === player && gameState.board[0][1] === player && gameState.board[0][2] === player;
+    if (wonRow1) {
+        hiliteWinningCombination(["c00", "c01", "c02"]);
+        return true;
+    }
+    var wonRow2 = gameState.board[1][0] === player && gameState.board[1][1] === player && gameState.board[1][2] === player;
+    if (wonRow2) {
+        hiliteWinningCombination(["c10", "c11", "c12"]);
+        return true;
+    }
+    var wonRow3 = gameState.board[2][0] === player && gameState.board[2][1] === player && gameState.board[2][2] === player;
+    if (wonRow3) {
+        hiliteWinningCombination(["c20", "c21", "c22"]);
+        return true;
+    }
+    return false;
 }
 
 function checkWinCol(player) {
-    return (gameState.board[0][0] === player && gameState.board[1][0] === player && gameState.board[2][0] === player) || (gameState.board[0][1] === player && gameState.board[1][1] === player && gameState.board[2][1] === player) || (gameState.board[0][2] === player && gameState.board[1][2] === player && gameState.board[2][2] === player);
+    var wonCol1 = gameState.board[0][0] === player && gameState.board[1][0] === player && gameState.board[2][0] === player;
+    if (wonCol1) {
+        hiliteWinningCombination(["c00", "c10", "c20"]);
+        return true;
+    }
+    var wonCol2 = gameState.board[0][1] === player && gameState.board[1][1] === player && gameState.board[2][1] === player;
+    if (wonCol2) {
+        hiliteWinningCombination(["c01", "c11", "c21"]);
+        return true;
+    }
+    var wonCol3 = gameState.board[0][2] === player && gameState.board[1][2] === player && gameState.board[2][2] === player;
+    if (wonCol3) {
+        hiliteWinningCombination(["c02", "c12", "c22"]);
+        return true;
+    }
+    return false;
 }
 
 function checkWinDiag(player) {
-    return (gameState.board[0][0] === player && gameState.board[1][1] === player && gameState.board[2][2] === player) || (gameState.board[0][2] === player && gameState.board[1][1] === player && gameState.board[2][0] === player);
+    var wonDiag1 = gameState.board[0][0] === player && gameState.board[1][1] === player && gameState.board[2][2] === player;
+    if (wonDiag1) {
+        hiliteWinningCombination(["c00", "c11", "c22"]);
+        return true;
+    }
+    var wonDiag2 = gameState.board[0][2] === player && gameState.board[1][1] === player && gameState.board[2][0] === player;
+    if (wonDiag2) {
+        hiliteWinningCombination(["c02", "c11", "c20"]);
+        return true;
+    }
+    return false;
 }
 
 function gameEnded() {
