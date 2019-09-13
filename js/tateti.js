@@ -5,15 +5,23 @@ function resetGame() {
         turn: throwCoin(),
         board: [],
         moves: 0,
-        winner: 0
+        winner: 0,
+        theme: document.getElementById("theme").value
     };
-    for (var i = 0; i < 3; i++) {
-        gameState.board.push(["", "", ""]);
-    }
-    for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 3; j++) {
-            document.getElementById("c" + i + j).classList.remove("p1", "p2", "animated", "flipInX");
+    var storedGameState = localStorage.getItem("tatetiGameState");
+    if (storedGameState) {
+        gameState = JSON.parse(storedGameState);
+        document.getElementById("theme").value = gameState.theme;
+    } else {
+        for (var i = 0; i < 3; i++) {
+            gameState.board.push(["", "", ""]);
         }
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                document.getElementById("c" + i + j).classList.remove("p1", "p2", "animated", "flipInX");
+            }
+        }
+        gameState.theme = document.getElementById("theme").value;
     }
     drawBoard();
     changeTheme();
@@ -31,15 +39,18 @@ function drawBoard() {
     for (var i = 0; i < 3; i++) {
         for (var j = 0; j < gameState.board[i].length; j++) {
             var cell = document.getElementById("c" + i + j);
-            cell.innerHTML = gameState.board[i][j];
-            cell.classList.remove("p1", "p2");
-            if (gameState.board[i][j] === "X") {
-                cell.classList.add("p1");
-            } else if (gameState.board[i][j] === "O") {
-                cell.classList.add("p2");
+            var boardContent = gameState.board[i][j];
+            cell.innerHTML = boardContent;
+            if (boardContent !== "") {
+                if (boardContent === "X") {
+                    cell.classList.add("p1");
+                } else {
+                    cell.classList.add("p2");
+                }
             }
         }
     }
+    localStorage.setItem("tatetiGameState", JSON.stringify(gameState));
 }
 
 function play(cell) {
@@ -66,8 +77,7 @@ function play(cell) {
 
 function checkWin(player) {
     var check = player === 1 ? "X" : "O";
-    var won = checkWinRow(check) || checkWinCol(check) || checkWinDiag(check);
-    if (won) {
+    if (checkWinRow(check) || checkWinCol(check) || checkWinDiag(check)) {
         gameState.winner = player;
         gameEnded();
     }
@@ -95,10 +105,13 @@ function gameEnded() {
         turn.innerHTML = gameState.winner;
         turn.classList.add("p" + gameState.winner);
     }
+    localStorage.removeItem("tatetiGameState");
 }
 
 function changeTheme() {
-    document.querySelector("body").setAttribute("class", document.getElementById("theme").value);
+    gameState.theme = document.getElementById("theme").value;
+    document.querySelector("body").setAttribute("class", gameState.theme);
+    localStorage.setItem("tatetiGameState", JSON.stringify(gameState));
 }
 
 function throwCoin() {
